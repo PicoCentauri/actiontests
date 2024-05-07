@@ -55,18 +55,16 @@ jobs:
 
             if (workflow_name == 'Documentation') {
                 const link = await getArtifactLink('docs', owner, repo, run_id);
-                const key = 'docs';
                 // Add horizontal line for docs only because assuming this is one
                 // triggered first. The wheels building should take much longer...
                 const body_message = `\n----\n 📖 [Download documentation](${link})\n`;
             } else { // wheels
                 const link = await getArtifactLink('wheels', owner, repo, run_id);
-                const key = 'wheels';
                 const body_message = `⚙️ [Download wheels](${link})\n`;
             }
 
-            const MESSAGE_SEPARATOR_START = `\r\n\r\n<!-- download-section ${key} start -->\r\n`;
-            const MESSAGE_SEPARATOR_END = `\r\n<!-- download-section ${key} end -->`;
+            const MESSAGE_SEPARATOR_START = `\r\n\r\n<!-- download-section ${workflow_name} start -->\r\n`;
+            const MESSAGE_SEPARATOR_END = `\r\n<!-- download-section ${workflow_name} end -->`;
 
             const { data: pull } = await github.rest.pulls.get({
                 owner: owner,
