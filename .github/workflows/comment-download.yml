@@ -32,8 +32,6 @@ jobs:
                 }
                 return core.error(`failed to find ${artifactName} artifact`);
             }
-            let link;
-            let body_message;
 
             const {owner, repo} = context.repo;
             const run_id = ${{github.event.workflow_run.id}};
@@ -55,10 +53,9 @@ jobs:
             const pull_number = items[0].number;
             console.info("Pull request number is", pull_number)
 
+            let body_message = "";
             if (workflow_name == 'Documentation') {
                 link = await getArtifactLink('docs', owner, repo, run_id);
-                // Add horizontal line for docs only because assuming this is one
-                // triggered first. The wheels building should take much longer...
                 body_message = `\n----\n 📖 [Download documentation](${link})\n`;
             } else { // wheels
                 link = await getArtifactLink('wheels', owner, repo, run_id);
