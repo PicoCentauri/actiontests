@@ -1,0 +1,23 @@
+name: Documentation
+
+on:
+  push:
+    branches: [master]
+    tags: ["*"]
+  pull_request:
+    # Check all PR
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: store documentation as github artifact to be downloaded by users
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs
+          path: docs/*
+          overwrite: true
