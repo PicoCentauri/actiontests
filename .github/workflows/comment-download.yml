@@ -47,8 +47,8 @@ jobs:
                 return core.error(`failed to find ${artifactName} artifact`);
             }
 
-            const docsLink = await getArtifactLink('docs');
-            const wheelsLink = await getArtifactLink('wheels');
+            const docsLink = `1` // await getArtifactLink('docs');
+            const wheelsLink = `2` // await getArtifactLink('wheels');
 
             const MESSAGE_SEPARATOR_START = `\r\n\r\n<!-- download-section start -->\r\n`;
             const MESSAGE_SEPARATOR_END = `\r\n<!-- download-section end -->`;
