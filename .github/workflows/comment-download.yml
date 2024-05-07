@@ -35,12 +35,7 @@ jobs:
 
             const {owner, repo} = context.repo;
             const run_id = ${{github.event.workflow_run.id}};
-
-            console.info('baaaar')
-
-            const workflow_name = "${{github.event.workflow_run.name}}"
-
-            console.info('fooooo')
+            const workflow_name = "${{github.event.workflow_run.name}}";
     
             console.info(`${workflow_name} triggered this run`)
 
@@ -55,17 +50,16 @@ jobs:
                 return core.error("No matching pull requests found");
             }
 
-            const pull_number = items[0].number
+            const pull_number = items[0].number;
             console.info("Pull request number is", pull_number)
 
             if (workflow_name == 'Documentation') {
                 const link = await getArtifactLink('docs', owner, repo, run_id);
                 const key = docs;
-                \\ Add horizontal line for docs only because assuming this is one triggered first.
-                \\ The wheels building should take much longer...
+                // Add horizontal line for docs only because assuming this is one
+                // triggered first. The wheels building should take much longer...
                 const body_message = `\n----\n 📖 [Download documentation](${link})\n`;
-
-            } else { \\ wheels
+            } else { // wheels
                 const link = await getArtifactLink('wheels', owner, repo, run_id);
                 const key = wheels;
                 const body_message = `⚙️ [Download wheels](${link})\n`;
@@ -104,4 +98,3 @@ jobs:
                 pull_number: pull_number,
                 body: body,
             });
-
