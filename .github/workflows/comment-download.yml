@@ -55,13 +55,13 @@ jobs:
 
             if (workflow_name == 'Documentation') {
                 const link = await getArtifactLink('docs', owner, repo, run_id);
-                const key = docs;
+                const key = 'docs';
                 // Add horizontal line for docs only because assuming this is one
                 // triggered first. The wheels building should take much longer...
                 const body_message = `\n----\n 📖 [Download documentation](${link})\n`;
             } else { // wheels
                 const link = await getArtifactLink('wheels', owner, repo, run_id);
-                const key = wheels;
+                const key = 'wheels';
                 const body_message = `⚙️ [Download wheels](${link})\n`;
             }
 
