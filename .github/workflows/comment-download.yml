@@ -59,10 +59,11 @@ jobs:
                 link = await getArtifactLink('docs', owner, repo, run_id);
                 // Add horizontal line for docs only because assuming this is one
                 // triggered first. The wheels building should take much longer...
-                body_message = `\n----\n 📖 [Download documentation](${link})\n`;
-            } else { // wheels
+                body_message = `\n----\n 📚 [Download documentation preview for this pull-request](${link})\n`;
+            }
+            else { // wheels
                 link = await getArtifactLink('wheels', owner, repo, run_id);
-                body_message = `⚙️ [Download wheels](${link})\n`;
+                body_message = `⚙️ [Download Python wheels for this pull-request (you can install these locally with `pip`)](${link})\n`;
             }
 
             const MESSAGE_SEPARATOR_START = `\r\n\r\n<!-- download-section ${workflow_name} start -->\r\n`;
