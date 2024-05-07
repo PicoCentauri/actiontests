@@ -35,7 +35,7 @@ jobs:
 
             const {owner, repo} = context.repo;
             const run_id = ${{github.event.workflow_run.id}};
-            const workflow_name = ${{github.event.workflow_run.name}};
+            const workflow_name = "${{github.event.workflow_run.name}}";
 
             console.info(`${workflow_name} triggered this run`)
 
