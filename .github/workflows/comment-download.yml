@@ -37,6 +37,8 @@ jobs:
             const run_id = ${{github.event.workflow_run.id}};
             const workflow_name = "${{github.event.workflow_run.name}}"
 
+            console.info('fooooo')
+    
             console.info(`${workflow_name} triggered this run`)
 
             // Find the PR with the right sha, see https://github.com/orgs/community/discussions/25220
