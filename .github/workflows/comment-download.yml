@@ -47,8 +47,9 @@ jobs:
             const pull_number = items[0].number
             console.info("Pull request number is", pull_number)
 
-            const docsLink = `1` // await getArtifactLink('docs', owner, repo, run_id);
-            const wheelsLink = `2` // await getArtifactLink('wheels', owner, repo, run_id);
+            const docsLink = await getArtifactLink('docs', owner, repo, run_id);
+            const wheelsLink = await getArtifactLink('wheels', owner, repo, run_id);
+            console.info("Artifacts found")
 
             const MESSAGE_SEPARATOR_START = `\r\n\r\n<!-- download-section start -->\r\n`;
             const MESSAGE_SEPARATOR_END = `\r\n<!-- download-section end -->`;
@@ -59,6 +60,8 @@ jobs:
                 repo: repo,
                 pull_number: pull_number,
             });
+
+            console.info("Pull request found")
 
             let body = "";
             if (pull.body) {
@@ -78,9 +81,13 @@ jobs:
                 body = MESSAGE_SEPARATOR_START + body_message + MESSAGE_SEPARATOR_END;
             }
 
+            console.info("Message replaced")
+
             github.rest.pulls.update({
                 owner: owner,
                 repo: repo,
                 pull_number: pull_number,
                 body: body,
             });
+
+            console.info("Comment updated")
