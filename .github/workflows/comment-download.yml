@@ -4,6 +4,9 @@ on:
     workflows: ['Documentation', 'Build Python wheels']
     types: [completed]
 
+permissions:
+    pull-requests: write
+
 jobs:
   pr_comment:
     if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'
@@ -32,6 +35,9 @@ jobs:
 
             const {owner, repo} = context.repo;
             const run_id = ${{github.event.workflow_run.id}};
+            const workflow_name = ${{github.event.workflow_run.name}};
+
+            console.info(`${workflow_name} triggered this run`)
 
             // Find the PR with the right sha, see https://github.com/orgs/community/discussions/25220
             const response = await github.rest.search.issuesAndPullRequests({
@@ -47,21 +53,27 @@ jobs:
             const pull_number = items[0].number
             console.info("Pull request number is", pull_number)
 
-            const docsLink = await getArtifactLink('docs', owner, repo, run_id);
-            const wheelsLink = await getArtifactLink('wheels', owner, repo, run_id);
-            console.info("Artifacts found")
+            if (workflow_name == 'Documentation') {
+                const link = await getArtifactLink('docs', owner, repo, run_id);
+                const key = docs;
+                \\ Add horizontal line for docs only because assuming this is one triggered first.
+                \\ The wheels building should take much longer...
+                const body_message = `\n----\n 📖 [Download documentation](${link})\n`;
 
-            const MESSAGE_SEPARATOR_START = `\r\n\r\n<!-- download-section start -->\r\n`;
-            const MESSAGE_SEPARATOR_END = `\r\n<!-- download-section end -->`;
-            const body_message = `\n----\n 📖 [Download documentation](${docsLink})\n⚙️ [Download wheels](${wheelsLink})\n`;
+            } else { \\ wheels
+                const link = await getArtifactLink('wheels', owner, repo, run_id);
+                const key = wheels;
+                const body_message = `⚙️ [Download wheels](${link})\n`;
+            }
+
+            const MESSAGE_SEPARATOR_START = `\r\n\r\n<!-- download-section ${key} start -->\r\n`;
+            const MESSAGE_SEPARATOR_END = `\r\n<!-- download-section ${key} end -->`;
 
             const { data: pull } = await github.rest.pulls.get({
                 owner: owner,
                 repo: repo,
                 pull_number: pull_number,
             });
-
-            console.info("Pull request found")
 
             let body = "";
             if (pull.body) {
@@ -81,8 +93,6 @@ jobs:
                 body = MESSAGE_SEPARATOR_START + body_message + MESSAGE_SEPARATOR_END;
             }
 
-            console.info("Message replaced")
-
             github.rest.pulls.update({
                 owner: owner,
                 repo: repo,
@@ -90,4 +100,3 @@ jobs:
                 body: body,
             });
 
-            console.info("Comment updated")
