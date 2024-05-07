@@ -35,6 +35,9 @@ jobs:
 
             const {owner, repo} = context.repo;
             const run_id = ${{github.event.workflow_run.id}};
+
+            console.info('baaaar')
+
             const workflow_name = "${{github.event.workflow_run.name}}"
 
             console.info('fooooo')
