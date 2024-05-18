@@ -2,11 +2,13 @@ name: Build Python wheels
 
 on:
   push:
-    branches: [master]
+    branches: [main]
     tags: ["*"]
   pull_request:
     # Check all PR
 
+permissions:
+  pull-requests: write
 
 jobs:
   merge-and-release:
@@ -21,3 +23,8 @@ jobs:
         with:
           name: wheels
           path: wheels/*
+
+      - uses: PicoCentauri/comment-artifact@v1
+        with:
+          name: wheels
+          text: ⚙️ Download wheels for this pull-request
