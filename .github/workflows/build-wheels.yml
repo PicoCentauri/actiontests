@@ -26,5 +26,6 @@ jobs:
 
       - uses: PicoCentauri/comment-artifact@main
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           name: wheels
           description: ⚙️ Download wheels for this pull-request
