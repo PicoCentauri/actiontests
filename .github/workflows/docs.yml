@@ -22,7 +22,7 @@ jobs:
           path: docs/*
           overwrite: true
 
-      - uses: PicoCentauri/comment-artifact@v1
+      - uses: PicoCentauri/comment-artifact@main
         with:
           name: docs
-          text: 📚 Download documentation for this pull-request
+          description: 📚 Download documentation for this pull-request
