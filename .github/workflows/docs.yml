@@ -22,7 +22,8 @@ jobs:
           path: docs/*
           overwrite: true
 
-      - uses: PicoCentauri/comment-artifact@v1
+      - uses: PicoCentauri/comment-artifact@main
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           name: docs
-          text: 📚 Download documentation for this pull-request
+          description: 📚 Download documentation for this pull-request
