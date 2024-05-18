@@ -2,7 +2,7 @@ name: Documentation
 
 on:
   push:
-    branches: [master]
+    branches: [main]
     tags: ["*"]
   pull_request:
     # Check all PR
@@ -21,3 +21,8 @@ jobs:
           name: docs
           path: docs/*
           overwrite: true
+
+      - uses: PicoCentauri/comment-artifact@v1
+        with:
+          name: docs
+          text: 📚 Download documentation for this pull-request
