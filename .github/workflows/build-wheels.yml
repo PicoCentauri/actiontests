@@ -15,15 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
       - name: Re-upload a single wheels artifact
         uses: actions/upload-artifact@v4
         with:
           name: wheels
           path: wheels/*
-
       - uses: PicoCentauri/comment-artifact@main
         with:
           name: wheels
