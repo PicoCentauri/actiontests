@@ -24,6 +24,5 @@ jobs:
 
       - uses: PicoCentauri/comment-artifact@main
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           name: docs
           description: 📚 Download documentation for this pull-request
