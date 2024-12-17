@@ -23,4 +23,4 @@ jobs:
       - uses: PicoCentauri/comment-artifact@main
         with:
           name: wheels
-          description: ⚙️ Download wheels for this pull-request
+          description: ⚙️ Download my wheels for this pull-request
