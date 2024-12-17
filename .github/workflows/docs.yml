@@ -22,3 +22,4 @@ jobs:
         with:
           name: docs
           description: 📚 Download documentation for this pull-request
+          github-token: ${{ github.token }}
