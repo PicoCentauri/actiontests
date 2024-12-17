@@ -18,7 +18,7 @@ jobs:
           name: docs
           path: docs/*
           overwrite: true
-      - uses: PicoCentauri/comment-artifact@ce45e3e
+      - uses: PicoCentauri/comment-artifact@main
         with:
           name: docs
           description: 📚 Download documentation for this pull-request
