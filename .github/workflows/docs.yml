@@ -24,4 +24,3 @@ jobs:
       - uses: PicoCentauri/comment-artifact@main
         with:
           name: docs
-          description: 📚 Download all documentation for this pull-request
