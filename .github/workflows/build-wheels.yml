@@ -20,7 +20,7 @@ jobs:
         with:
           name: wheels
           path: wheels/*
-      - uses: PicoCentauri/comment-artifact@v1
+      - uses: PicoCentauri/comment-artifact@main
         with:
           name: wheels
           description: ⚙️ Download my wheels for this pull-request
