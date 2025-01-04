@@ -7,12 +7,11 @@ on:
   pull_request:
     # Check all PR
 
-permissions:
-  pull-requests: write
-
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
+    # permissions:
+    #   pull-requests: write
     steps:
       - uses: actions/checkout@v4
       - name: store documentation as github artifact to be downloaded by users
@@ -21,6 +20,6 @@ jobs:
           name: docs
           path: docs/*
           overwrite: true
-      - uses: PicoCentauri/comment-artifact@v1
+      - uses: PicoCentauri/comment-artifact@improve-no-write-error
         with:
           name: docs
