@@ -21,6 +21,6 @@ jobs:
           name: docs
           path: docs/*
           overwrite: true
-      - uses: PicoCentauri/comment-artifact@check-if-PR
+      - uses: PicoCentauri/comment-artifact@v1
         with:
           name: docs
